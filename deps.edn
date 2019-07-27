@@ -1,0 +1,13 @@
+{:deps {org.clojure/tools.cli {:mvn/version "0.3.5"}
+        org.clojure/tools.reader {:mvn/version "1.0.0-beta4"}
+        org.clojure/clojure {:mvn/version "1.8.0"}}
+  :aliases {:native-image
+           {:main-opts ["-m clj.native-image wah.core"
+                        "--initialize-at-build-time"
+                        ;; optional native image name override
+                        "-H:Name=wah2wat"]
+            :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+            :extra-deps
+            {clj.native-image
+             {:git/url "https://github.com/taylorwood/clj.native-image.git"
+              :sha "7708e7fd4572459c81f6a6b8e44c96f41cdd92d4"}}}}}

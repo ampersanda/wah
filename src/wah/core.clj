@@ -3,7 +3,9 @@
   (:require [clojure.tools.reader.edn :as edn])
   (:require [clojure.walk :as w])
   (:require [clojure.string :as str])
-  (:require [clojure.test :refer :all]) (:gen-class))
+  (:require [clojure.test :refer :all])
+
+  (:gen-class))
 
 (def i32-sources (set ['i32.const
                        'i32.load8_s
