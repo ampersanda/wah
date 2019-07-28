@@ -24,7 +24,7 @@ jobs:
     steps:
       - checkout
       - run: echo "downloading graalvm"
-      - run: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar.xz
+      - run: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar -xz
 
       - run: echo "install native-image using gu"
       - run: export GRAALVM_HOME=./graalvm-ce-19.1.1
