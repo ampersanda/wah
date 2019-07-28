@@ -23,13 +23,18 @@ jobs:
 
     steps:
       - checkout
-      - run: echo "downloading graalvm"
-      - run: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar -xz
-
-      - run: echo "install native-image using gu"
-      - run: export GRAALVM_HOME=./graalvm-ce-19.1.1
-      - run: $GRAALVM_HOME/bin/gu install native-image
-      - run: clojure -A:native-image
+      - run:
+          name: "downloading graalvm"
+          command: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar -xz
+      - run:
+          name: "set graalvm path"
+          command: echo 'export GRAALVM_HOME=./graalvm-ce-19.1.1' >> $BASH_ENV
+      - run:
+          name: "install native-image using gu"
+          command: $GRAALVM_HOME/bin/gu install native-image
+      - run:
+          name: "build"
+          command: clojure -A:native-image
 
       # Download and cache dependencies
 #      - restore_cache:
