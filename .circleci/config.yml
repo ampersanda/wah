@@ -5,9 +5,9 @@
 version: 2
 jobs:
   build:
-    docker:
+#    docker:
       # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1
+#      - image: circleci/clojure:lein-2.7.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -17,26 +17,33 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      LEIN_ROOT: "true"
+#      LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
 
     steps:
       - checkout
+      - run: echo "downloading graalvm"
+      - run: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar.xz
+
+      - run: echo "install native-image using gu"
+      - run: export GRAALVM_HOME=./graalvm-ce-19.1.1
+      - run: $GRAALVM_HOME/bin/gu install native-image
+      - run: clojure -A:native-image
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "project.clj" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: lein deps
-
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "project.clj" }}
-
-      # run tests!
-      - run: lein test
+#      - restore_cache:
+#          keys:
+#            - v1-dependencies-{{ checksum "project.clj" }}
+#            # fallback to using the latest cache if no exact match is found
+#            - v1-dependencies-
+#
+#      - run: lein deps
+#
+#      - save_cache:
+#          paths:
+#            - ~/.m2
+#          key: v1-dependencies-{{ checksum "project.clj" }}
+#
+#      # run tests!
+#      - run: lein test
