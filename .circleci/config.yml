@@ -5,9 +5,12 @@
 version: 2
 jobs:
   build:
-    docker:
+    machine:
+      image: ubuntu-1604:201903-01
+      docker_layer_caching: true
+#    docker:
       # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1
+#      - image: circleci/clojure:lein-2.7.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,6 +26,9 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: "install clojure"
+          command: curl -O https://download.clojure.org/install/linux-install-1.10.1.466.sh && chmod +x linux-install-1.10.1.466.sh && ./linux-install-1.10.1.466.sh
       - run:
           name: "downloading graalvm"
           command: curl -L https://github.com/oracle/graal/releases/download/vm-19.1.1/graalvm-ce-linux-amd64-19.1.1.tar.gz | tar -xz
