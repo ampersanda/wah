@@ -1,6 +1,6 @@
 # wah
 
-[![CircleCI](https://circleci.com/gh/tmcw/wah.svg?style=shield)](https://circleci.com/gh/tmcw/wah) [![Clojars Project](https://img.shields.io/clojars/v/wah.svg)](https://clojars.org/wah)
+[![CircleCI](https://circleci.com/gh/ampersanda/wah/tree/master.svg?style=svg)](https://circleci.com/gh/ampersanda/wah/tree/master) [![Clojars Project](https://img.shields.io/clojars/v/wah.svg)](https://clojars.org/wah)
 
 Shortcuts for wasm
 
@@ -34,6 +34,14 @@ This is a PR-only repository: there's no issue tracker.
 * To propose a feature, open a PR with a failing testcase or an initial implementation
 
 I'll be overjoyed to review & merge PRs!
+
+## Make executable file
+
+1. Install Clojure CLI (https://clojure.org/guides/getting_started)
+2. Install GraalVM (https://www.graalvm.org/downloads/)
+3. Set `$GRAALVM_HOME` environment variables pointed to graalvm folder (not graalvm `bin` folder) or `export GRAALVM_HOME=path_to_graalvm_folder`
+4. Install `native-image` using `gu` or `$GRAALVM_HOME/bin/gu native-image`
+5. Generate executable by executing `clj -A:native-image`
 
 ## License
 
