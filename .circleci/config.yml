@@ -36,7 +36,7 @@ jobs:
           command: clojure -A:native-image
       - run:
           name: move artifact to folder
-          command: mv ./flutter-kit /tmp/artifacts
+          command: mv ./wah2wat /tmp/artifacts
       - store_artifacts:
           path: /tmp/artifacts
 
