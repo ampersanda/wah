@@ -17,6 +17,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: creating artifacts folder
+          command: mkdir /tmp/artifacts
+      - run:
           name: "install clojure"
           command: curl -O https://download.clojure.org/install/linux-install-1.10.1.466.sh && chmod +x linux-install-1.10.1.466.sh && sudo ./linux-install-1.10.1.466.sh
       - run:
@@ -31,4 +34,9 @@ jobs:
       - run:
           name: "build"
           command: clojure -A:native-image
+      - run:
+          name: move artifact to folder
+          command: mv ./flutter-kit /tmp/artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
 
